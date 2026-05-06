@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📜 Le Texte Sacré</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #ffd89b 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ffd700;
+            animation: fall linear infinite;
+            top: -10px;
+            z-index: 0;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #ffd700, #ff6b6b, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.4);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.35);
+            transform: translateX(-3px);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 24px;
+            padding: 35px;
+            margin-bottom: 35px;
+            border: 1px solid rgba(255,255,255,0.25);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .read-btn-wrapper {
+            text-align: center;
+            padding: 10px 0 5px;
+        }
+
+        .read-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            color: #333;
+            font-weight: bold;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .read-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.7);
+        }
+
+        .read-btn-sub {
+            margin-top: 12px;
+            font-size: 0.9rem;
+            opacity: 0.75;
+            font-style: italic;
+        }
+
+        .pdf-viewer-section {
+            display: none;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .pdf-viewer-section.visible {
+            display: block;
+        }
+
+        .pdf-frame-wrapper {
+            background: transparent;
+            overflow: hidden;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .pdf-frame-wrapper iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+            display: block;
+            background: transparent;
+        }
+
+        .pdf-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            color: #333;
+            font-weight: bold;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.05rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 25px rgba(255, 215, 0, 0.6);
+        }
+
+        .return-link {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .return-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.4);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .return-home:hover {
+            background: rgba(255,255,255,0.35);
+            transform: translateY(-2px);
+        }
+
+        .bg-mute-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.5);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s;
+        }
+
+        .bg-mute-btn:hover {
+            background: rgba(0,0,0,0.7);
+            transform: scale(1.1);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
+            .section { padding: 20px; }
+            .pdf-frame-wrapper iframe { height: 500px; }
+            .read-btn { font-size: 1rem; padding: 15px 28px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="index.html" class="back-btn" id="backLink">← Retour à la page d'accueil</a>
+
+        <header>
+            <h1>📜 Le Texte Sacré</h1>
+            <p>Un texte qui t'a marqué</p>
+        </header>
+
+        <section class="section">
+            <h2 class="section-title">📄 Le Texte Sacré</h2>
+            <div class="read-btn-wrapper">
+                <button class="read-btn" id="openTextBtn">
+                    📖 Lire le texte sacré
+                </button>
+                <p class="read-btn-sub">Peu de gens connaissent l'existence de ce texte</p>
+            </div>
+        </section>
+
+        <section class="pdf-viewer-section" id="pdfSection">
+            <div class="pdf-frame-wrapper">
+                <iframe
+                    id="pdfFrame"
+                    src=""
+                    title="Le Texte Sacré"
+                    style="background: transparent;">
+                </iframe>
+            </div>
+            <div class="pdf-actions">
+                <a href="Texte_sacré.pdf" download="Texte_sacré.pdf" class="download-btn">
+                    ⬇ Télécharger le PDF
+                </a>
+            </div>
+            
+            <div class="return-link">
+                <a href="index.html" class="return-home" id="returnHomeLink">
+                    🏠 Retourner à l'accueil
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <p>Fait avec amour par Evan Raimbault</p>
+        </footer>
+    </div>
+
+    <button class="bg-mute-btn" id="bgMuteBtn">🔊</button>
+
+    <script>
+        // Confettis
+        const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#45b7d1', '#f093fb', '#f5576c', '#96e6a1'];
+        for (let i = 0; i < 50; i++) {
+            const c = document.createElement('div');
+            c.className = 'confetti';
+            c.style.left = Math.random() * 100 + 'vw';
+            c.style.background = colors[Math.floor(Math.random() * colors.length)];
+            c.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            c.style.animationDelay = Math.random() * 5 + 's';
+            c.style.width = (Math.random() * 8 + 6) + 'px';
+            c.style.height = (Math.random() * 8 + 6) + 'px';
+            c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+            document.body.appendChild(c);
+        }
+
+        let bgMusic = null;
+        let isBgMuted = false;
+        
+        // Récupérer l'état du son depuis sessionStorage
+        const savedAudio = sessionStorage.getItem('sharedAudio');
+        
+        if (savedAudio) {
+            try {
+                const audioState = JSON.parse(savedAudio);
+                bgMusic = new Audio('Audio/OFFROAD.mp3');
+                bgMusic.loop = true;
+                bgMusic.volume = 0.3;
+                bgMusic.currentTime = audioState.currentTime || 0;
+                bgMusic.muted = audioState.muted || false;
+                isBgMuted = audioState.muted || false;
+                
+                if (audioState.isPlaying) {
+                    bgMusic.play().catch(() => {});
+                }
+                
+                updateMuteButton();
+            } catch(e) {
+                createNewBgMusic();
+            }
+        } else {
+            createNewBgMusic();
+        }
+        
+        function createNewBgMusic() {
+            bgMusic = new Audio('Audio/OFFROAD.mp3');
+            bgMusic.loop = true;
+            bgMusic.volume = 0.3;
+            bgMusic.play().catch(() => {});
+        }
+        
+        function updateMuteButton() {
+            const btn = document.getElementById('bgMuteBtn');
+            btn.textContent = isBgMuted ? '🔇' : '🔊';
+        }
+        
+        // Bouton mute
+        const bgMuteBtn = document.getElementById('bgMuteBtn');
+        bgMuteBtn.addEventListener('click', () => {
+            if (bgMusic) {
+                isBgMuted = !isBgMuted;
+                bgMusic.muted = isBgMuted;
+                bgMuteBtn.textContent = isBgMuted ? '🔇' : '🔊';
+                saveAudioState();
+            }
+        });
+        
+        function saveAudioState() {
+            if (bgMusic) {
+                const audioState = {
+                    currentTime: bgMusic.currentTime,
+                    isPlaying: !bgMusic.paused,
+                    muted: bgMusic.muted
+                };
+                sessionStorage.setItem('sharedAudio', JSON.stringify(audioState));
+            }
+        }
+        
+        setInterval(saveAudioState, 1000);
+        
+        // Audio de la voix
+        const voiceAudio = new Audio('Audio/Audio Final.m4a');
+        let isVoicePlaying = false;
+        
+        voiceAudio.addEventListener('play', () => {
+            if (!isVoicePlaying) {
+                isVoicePlaying = true;
+                if (bgMusic) bgMusic.pause();
+                bgMuteBtn.style.opacity = '0.5';
+            }
+        });
+        
+        voiceAudio.addEventListener('ended', () => {
+            isVoicePlaying = false;
+            if (bgMusic && !isBgMuted) {
+                bgMusic.play().catch(() => {});
+            }
+            bgMuteBtn.style.opacity = '1';
+            saveAudioState();
+        });
+        
+        voiceAudio.addEventListener('pause', () => {
+            if (voiceAudio.currentTime === voiceAudio.duration || voiceAudio.ended) {
+                // Fin normale
+            } else if (isVoicePlaying) {
+                isVoicePlaying = false;
+                if (bgMusic && !isBgMuted) {
+                    bgMusic.play().catch(() => {});
+                }
+                bgMuteBtn.style.opacity = '1';
+            }
+        });
+        
+        // Ouvrir le texte
+        function openText() {
+            const pdfSection = document.getElementById('pdfSection');
+            const pdfFrame = document.getElementById('pdfFrame');
+            const btn = document.getElementById('openTextBtn');
+            
+            pdfFrame.src = 'Texte_sacré.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH';
+            pdfSection.classList.add('visible');
+            
+            btn.textContent = '✅ Texte ouvert ci-dessous';
+            btn.style.background = 'linear-gradient(135deg, #96e6a1, #4ecdc4)';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                pdfSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 200);
+            
+            voiceAudio.play().catch(() => {});
+        }
+        
+        document.getElementById('openTextBtn').onclick = openText;
+        
+        // Sauvegarder avant de quitter
+        const backLink = document.getElementById('backLink');
+        const returnHomeLink = document.getElementById('returnHomeLink');
+        
+        function saveAndExit() {
+            saveAudioState();
+        }
+        
+        backLink.addEventListener('click', saveAndExit);
+        returnHomeLink.addEventListener('click', saveAndExit);
+        
+        window.addEventListener('beforeunload', () => {
+            saveAudioState();
+        });
+    </script>
+</body>
+</html>

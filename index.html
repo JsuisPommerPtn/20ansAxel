@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎉 Joyeux Anniversaire !</title>
+    <title>🎉 Joyeux Anniversaire Axel !</title>
     <style>
         * {
             margin: 0;
@@ -19,7 +19,6 @@
             overflow-x: hidden;
         }
 
-        /* Confettis animés */
         .confetti {
             position: fixed;
             width: 10px;
@@ -32,9 +31,7 @@
         }
 
         @keyframes fall {
-            to {
-                transform: translateY(100vh) rotate(720deg);
-            }
+            to { transform: translateY(100vh) rotate(720deg); }
         }
 
         .container {
@@ -43,6 +40,48 @@
             padding: 40px 20px;
             position: relative;
             z-index: 1;
+        }
+
+        /* Overlay de démarrage */
+        .start-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+            gap: 25px;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            color: #333;
+            font-size: 1.8rem;
+            font-weight: bold;
+            padding: 20px 50px;
+            border-radius: 60px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 30px rgba(255,215,0,0.5);
+        }
+
+        .start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px rgba(255,215,0,0.8);
+        }
+
+        .start-title {
+            font-size: 2rem;
+            color: #ffd700;
+            text-align: center;
         }
 
         header {
@@ -96,7 +135,6 @@
             gap: 12px;
         }
 
-        /* Carrousel */
         .carousel-wrapper {
             position: relative;
             overflow: hidden;
@@ -182,120 +220,50 @@
             transform: scale(1.3);
         }
 
-        /* Audio Player */
-        .audio-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .audio-visual {
-            display: flex;
-            gap: 6px;
-            align-items: flex-end;
-            height: 60px;
-        }
-
-        .bar {
-            width: 8px;
-            background: linear-gradient(to top, #ffd700, #ff6b6b);
-            border-radius: 4px;
-            animation: bounce 1s ease-in-out infinite;
-        }
-
-        .bar:nth-child(1) { height: 20px; animation-delay: 0s; }
-        .bar:nth-child(2) { height: 40px; animation-delay: 0.1s; }
-        .bar:nth-child(3) { height: 30px; animation-delay: 0.2s; }
-        .bar:nth-child(4) { height: 50px; animation-delay: 0.3s; }
-        .bar:nth-child(5) { height: 25px; animation-delay: 0.4s; }
-        .bar:nth-child(6) { height: 45px; animation-delay: 0.5s; }
-        .bar:nth-child(7) { height: 35px; animation-delay: 0.6s; }
-
-        @keyframes bounce {
-            0%, 100% { transform: scaleY(1); }
-            50% { transform: scaleY(1.4); }
-        }
-
-        .audio-visual.paused .bar {
-            animation-play-state: paused;
-            height: 10px !important;
-            transition: height 0.3s;
-        }
-
-        audio {
-            width: 100%;
-            max-width: 500px;
-            border-radius: 50px;
-            outline: none;
-        }
-
-        audio::-webkit-media-controls-panel {
-            background: rgba(255,255,255,0.9);
-        }
-
-        .audio-note {
-            font-size: 0.95rem;
-            opacity: 0.8;
-            font-style: italic;
-        }
-
-        /* Download */
-        .download-card {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 16px;
-            padding: 25px;
-            border: 1px dashed rgba(255,255,255,0.4);
-            transition: all 0.3s;
-        }
-
-        .download-card:hover {
-            background: rgba(255,255,255,0.2);
-            transform: translateY(-3px);
-        }
-
-        .file-icon {
-            font-size: 3.5rem;
-            flex-shrink: 0;
-        }
-
-        .file-info {
-            flex: 1;
-        }
-
-        .file-info h3 {
-            font-size: 1.3rem;
-            margin-bottom: 5px;
-        }
-
-        .file-info p {
-            opacity: 0.8;
-            font-size: 0.95rem;
-        }
-
-        .download-btn {
+        .discover-btn {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             background: linear-gradient(135deg, #ffd700, #ff8c00);
             color: #333;
             font-weight: bold;
-            padding: 14px 28px;
+            padding: 18px 44px;
             border-radius: 50px;
             text-decoration: none;
-            font-size: 1.05rem;
+            font-size: 1.2rem;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
-            border: none;
-            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.5);
         }
 
-        .download-btn:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 6px 25px rgba(255, 215, 0, 0.6);
+        .discover-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.7);
+        }
+
+        .mute-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.5);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+   
+
+        .mute-btn:hover {
+            background: rgba(0,0,0,0.7);
+            transform: scale(1.1);
         }
 
         footer {
@@ -305,17 +273,22 @@
             font-size: 0.9rem;
         }
 
-        /* Responsive */
         @media (max-width: 600px) {
             header h1 { font-size: 2.2rem; }
             .carousel-slide { height: 280px; }
             .section { padding: 20px; }
-            .download-card { flex-direction: column; text-align: center; }
+            .start-btn { font-size: 1.2rem; padding: 15px 30px; }
+            .start-title { font-size: 1.3rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Confettis générés en JS -->
+
+    <!-- Overlay de démarrage -->
+    <div class="start-overlay" id="startOverlay">
+        <div class="start-title">🎂 Joyeux Anniversaire Axel ! 🎉</div>
+        <button class="start-btn" id="startBtn">Découvrir la surprise</button>
+    </div>
 
     <div class="container">
         <header>
@@ -323,13 +296,12 @@
             <p>Une page spéciale pour mon DIGITAL TWIN</p>
         </header>
 
-        <!-- Carrousel d'images -->
         <section class="section">
             <h2 class="section-title">📸 Le principal concerné</h2>
             <div class="carousel-wrapper">
                 <div class="carousel-track" id="track">
                     <div class="carousel-slide">
-                        <img src="Photos/Fédodobébé.JPEG" alt="Fédodobébé ">
+                        <img src="Photos/Fédodobébé.JPEG" alt="Fédodobébé">
                         <div class="carousel-caption">Dur dur la vie d'Axel</div>
                     </div>
                     <div class="carousel-slide">
@@ -338,10 +310,10 @@
                     </div>
                     <div class="carousel-slide">
                         <img src="Photos/Caputime.JPEG" alt="Caputime">
-                        <div class="carousel-caption">sa devise : CAPUTIME! </div>
+                        <div class="carousel-caption">sa devise : CAPUTIME!</div>
                     </div>
                     <div class="carousel-slide">
-                        <img src="Photos/Malicieux.JPEG" alt=" ">
+                        <img src="Photos/Malicieux.JPEG" alt="Malicieux">
                         <div class="carousel-caption">Toujours à faire des bêtises</div>
                     </div>
                 </div>
@@ -351,48 +323,23 @@
             <div class="carousel-dots" id="dots"></div>
         </section>
 
-        <!-- Lecteur audio -->
-        <section class="section">
-            <h2 class="section-title">🎵 La bande-son de la soirée</h2>
-            <div class="audio-container">
-                <div class="audio-visual paused" id="visualizer">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                </div>
-                <audio id="audioPlayer" controls>
-                    <source src="Audio/Audio Final.m4a" type="audio/mpeg">
-                    Ton navigateur ne supporte pas la lecture audio.
-                </audio>
-            </div>
-        </section>
-
-        <!-- Téléchargement -->
-        <section class="section">
-            <h2 class="section-title">📥 Un petit cadeau numérique</h2>
-            <div class="download-card">
-                <div class="file-icon">📄</div>
-                <div class="file-info">
-                    <h3>Le texte sacré</h3>
-                    <p>Une grande histoire qui t'a marqué</p>
-                </div>
-                <a href="Texte_sacré.pdf" download="Texte_sacré.pdf" class="download-btn">
-                    ⬇ Télécharger
-                </a>
-            </div>
+        <section class="section" style="text-align: center;">
+            <h2 class="section-title" style="justify-content: center;">Ta surprise t'attend</h2>
+            <p style="opacity: 0.9; margin-bottom: 28px; font-size: 1.05rem;">
+            <a href="texte.html" class="discover-btn" id="discoverLink">
+                Découvrir la surprise 📜
+            </a>
         </section>
 
         <footer>
-            <p>Fait par Evan Raimbault</p>
+            <p>Fait avec amour par Evan Raimbault</p>
         </footer>
     </div>
 
+    <button class="mute-btn" id="muteBtn" style="display: none;">🔊</button>
+
     <script>
-        // === Confettis ===
+        // Confettis
         const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#45b7d1', '#f093fb', '#f5576c', '#96e6a1'];
         for (let i = 0; i < 50; i++) {
             const confetti = document.createElement('div');
@@ -407,52 +354,161 @@
             document.body.appendChild(confetti);
         }
 
-        // === Carrousel ===
+        let bgMusic = null;
+        let isMuted = false;
+
+        // Vérifier si la musique a déjà été démarrée (via sessionStorage)
+        const musicStartedFlag = sessionStorage.getItem('musicStarted');
+        const savedAudio = sessionStorage.getItem('sharedAudio');
+
+        // Si la musique a déjà été démarrée ou qu'il y a un état audio sauvegardé
+        if (musicStartedFlag === 'true' || savedAudio) {
+            // Cacher l'overlay immédiatement
+            const startOverlay = document.getElementById('startOverlay');
+            const muteBtn = document.getElementById('muteBtn');
+            startOverlay.style.display = 'none';
+            muteBtn.style.display = 'flex';
+            
+            // Restaurer la musique
+            if (savedAudio) {
+                try {
+                    const audioState = JSON.parse(savedAudio);
+                    bgMusic = new Audio('Audio/OFFROAD.mp3');
+                    bgMusic.loop = true;
+                    bgMusic.volume = 0.3;
+                    bgMusic.currentTime = audioState.currentTime || 0;
+                    bgMusic.muted = audioState.muted || false;
+                    isMuted = audioState.muted || false;
+                    
+                    if (audioState.isPlaying) {
+                        bgMusic.play().catch(() => {});
+                    }
+                    
+                    updateMuteButton();
+                } catch(e) {
+                    createNewAudio();
+                }
+            } else {
+                createNewAudio();
+            }
+        } else {
+            // Première visite, on attend le clic
+            const startBtn = document.getElementById('startBtn');
+            const startOverlay = document.getElementById('startOverlay');
+            
+            startBtn.addEventListener('click', () => {
+                initAudio();
+                startOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    startOverlay.style.display = 'none';
+                    document.getElementById('muteBtn').style.display = 'flex';
+                }, 500);
+                // Marquer que la musique a été démarrée
+                sessionStorage.setItem('musicStarted', 'true');
+            });
+        }
+
+        function initAudio() {
+            bgMusic = new Audio('Audio/OFFROAD.mp3');
+            bgMusic.loop = true;
+            bgMusic.volume = 0.3;
+            
+            bgMusic.play().then(() => {
+                console.log('Musique démarrée');
+            }).catch((e) => {
+                console.log('Erreur audio:', e);
+            });
+        }
+
+        function createNewAudio() {
+            bgMusic = new Audio('Audio/OFFROAD.mp3');
+            bgMusic.loop = true;
+            bgMusic.volume = 0.3;
+            bgMusic.play().catch(() => {});
+        }
+
+        function updateMuteButton() {
+            const muteBtn = document.getElementById('muteBtn');
+            muteBtn.textContent = isMuted ? '🔇' : '🔊';
+        }
+
+        // Bouton mute
+        const muteBtn = document.getElementById('muteBtn');
+        muteBtn.addEventListener('click', () => {
+            if (bgMusic) {
+                isMuted = !isMuted;
+                bgMusic.muted = isMuted;
+                muteBtn.textContent = isMuted ? '🔇' : '🔊';
+            }
+        });
+
+        // Sauvegarder l'état du son dans sessionStorage
+        function saveAudioState() {
+            if (bgMusic) {
+                const audioState = {
+                    currentTime: bgMusic.currentTime,
+                    isPlaying: !bgMusic.paused,
+                    muted: bgMusic.muted
+                };
+                sessionStorage.setItem('sharedAudio', JSON.stringify(audioState));
+            }
+        }
+
+        setInterval(saveAudioState, 1000);
+
+        window.addEventListener('beforeunload', () => {
+            if (bgMusic) {
+                const audioState = {
+                    currentTime: bgMusic.currentTime,
+                    isPlaying: !bgMusic.paused,
+                    muted: bgMusic.muted
+                };
+                sessionStorage.setItem('sharedAudio', JSON.stringify(audioState));
+            }
+        });
+
+        // Carrousel
         const track = document.getElementById('track');
         const slides = document.querySelectorAll('.carousel-slide');
         const dotsContainer = document.getElementById('dots');
         let currentIndex = 0;
-
-        // Créer les dots
+        
         slides.forEach((_, i) => {
             const dot = document.createElement('button');
             dot.className = 'dot' + (i === 0 ? ' active' : '');
             dot.onclick = () => goToSlide(i);
             dotsContainer.appendChild(dot);
         });
-
+        
         function updateCarousel() {
             track.style.transform = `translateX(-${currentIndex * 100}%)`;
             document.querySelectorAll('.dot').forEach((d, i) => {
                 d.classList.toggle('active', i === currentIndex);
             });
         }
-
+        
         function nextSlide() {
             currentIndex = (currentIndex + 1) % slides.length;
             updateCarousel();
         }
-
+        
         function prevSlide() {
             currentIndex = (currentIndex - 1 + slides.length) % slides.length;
             updateCarousel();
         }
-
+        
         function goToSlide(index) {
             currentIndex = index;
             updateCarousel();
         }
-
-        // Auto-play carrousel
+        
         setInterval(nextSlide, 5000);
 
-        // === Audio visualizer ===
-        const audio = document.getElementById('audioPlayer');
-        const visualizer = document.getElementById('visualizer');
-
-        audio.addEventListener('play', () => visualizer.classList.remove('paused'));
-        audio.addEventListener('pause', () => visualizer.classList.add('paused'));
-        audio.addEventListener('ended', () => visualizer.classList.add('paused'));
+        // Au clic sur le lien, sauvegarder l'état
+        const discoverLink = document.getElementById('discoverLink');
+        discoverLink.addEventListener('click', () => {
+            saveAudioState();
+        });
     </script>
 </body>
 </html>
