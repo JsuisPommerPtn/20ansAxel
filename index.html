@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>🎉 Joyeux Anniversaire Axel !</title>
     <style>
         * {
@@ -28,6 +28,7 @@
             top: -10px;
             z-index: 0;
             opacity: 0.8;
+            pointer-events: none;
         }
 
         @keyframes fall {
@@ -49,7 +50,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.95);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -57,31 +58,31 @@
             flex-direction: column;
             gap: 25px;
             backdrop-filter: blur(10px);
-            cursor: pointer;
         }
 
         .start-btn {
             background: linear-gradient(135deg, #ffd700, #ff8c00);
             color: #333;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
-            padding: 20px 50px;
+            padding: 15px 35px;
             border-radius: 60px;
             border: none;
             cursor: pointer;
             transition: all 0.3s;
             box-shadow: 0 0 30px rgba(255,215,0,0.5);
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .start-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 50px rgba(255,215,0,0.8);
+        .start-btn:active {
+            transform: scale(0.97);
         }
 
         .start-title {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: #ffd700;
             text-align: center;
+            padding: 0 20px;
         }
 
         header {
@@ -91,7 +92,7 @@
         }
 
         header h1 {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
             margin-bottom: 10px;
             background: linear-gradient(to right, #ffd700, #ff6b6b, #ffd700);
@@ -101,7 +102,7 @@
         }
 
         header p {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             opacity: 0.95;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
@@ -120,7 +121,7 @@
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(15px);
             border-radius: 24px;
-            padding: 35px;
+            padding: 25px;
             margin-bottom: 35px;
             border: 1px solid rgba(255,255,255,0.25);
             box-shadow: 0 8px 32px rgba(0,0,0,0.2);
@@ -128,8 +129,8 @@
         }
 
         .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 12px;
@@ -149,7 +150,7 @@
 
         .carousel-slide {
             min-width: 100%;
-            height: 450px;
+            height: 300px;
             position: relative;
         }
 
@@ -166,8 +167,8 @@
             left: 0;
             right: 0;
             background: linear-gradient(transparent, rgba(0,0,0,0.7));
-            padding: 30px 20px 20px;
-            font-size: 1.2rem;
+            padding: 20px 15px 15px;
+            font-size: 1rem;
             text-align: center;
         }
 
@@ -178,9 +179,9 @@
             background: rgba(255,255,255,0.25);
             border: 2px solid rgba(255,255,255,0.5);
             color: white;
-            font-size: 2rem;
-            width: 50px;
-            height: 50px;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
@@ -188,31 +189,32 @@
             justify-content: center;
             transition: all 0.3s;
             backdrop-filter: blur(5px);
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .carousel-btn:hover {
-            background: rgba(255,255,255,0.45);
-            transform: translateY(-50%) scale(1.1);
+        .carousel-btn:active {
+            transform: translateY(-50%) scale(0.95);
         }
 
-        .carousel-btn.prev { left: 15px; }
-        .carousel-btn.next { right: 15px; }
+        .carousel-btn.prev { left: 10px; }
+        .carousel-btn.next { right: 10px; }
 
         .carousel-dots {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 8px;
+            margin-top: 15px;
         }
 
         .dot {
-            width: 12px;
-            height: 12px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: rgba(255,255,255,0.4);
             cursor: pointer;
             transition: all 0.3s;
             border: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .dot.active {
@@ -223,68 +225,73 @@
         .discover-btn {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+            gap: 10px;
             background: linear-gradient(135deg, #ffd700, #ff8c00);
             color: #333;
             font-weight: bold;
-            padding: 18px 44px;
+            padding: 14px 30px;
             border-radius: 50px;
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             transition: all 0.3s;
             box-shadow: 0 4px 20px rgba(255, 215, 0, 0.5);
+            -webkit-tap-highlight-color: transparent;
+            width: 100%;
+            max-width: 280px;
+            margin: 0 auto;
         }
 
-        .discover-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.7);
+        .discover-btn:active {
+            transform: scale(0.97);
         }
 
         .mute-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             border: none;
             color: white;
-            font-size: 1.5rem;
-            width: 50px;
-            height: 50px;
+            font-size: 1.2rem;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             cursor: pointer;
             z-index: 100;
             backdrop-filter: blur(5px);
             transition: all 0.3s;
+            display: flex;
             align-items: center;
             justify-content: center;
-            line-height: 1;
+            -webkit-tap-highlight-color: transparent;
         }
-   
 
-        .mute-btn:hover {
-            background: rgba(0,0,0,0.7);
-            transform: scale(1.1);
+        .mute-btn:active {
+            transform: scale(0.95);
         }
 
         footer {
             text-align: center;
             margin-top: 40px;
             opacity: 0.7;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
 
-        @media (max-width: 600px) {
-            header h1 { font-size: 2.2rem; }
-            .carousel-slide { height: 280px; }
-            .section { padding: 20px; }
-            .start-btn { font-size: 1.2rem; padding: 15px 30px; }
-            .start-title { font-size: 1.3rem; }
+        @media (min-width: 768px) {
+            header h1 { font-size: 3.5rem; }
+            header p { font-size: 1.3rem; }
+            .carousel-slide { height: 450px; }
+            .section { padding: 35px; }
+            .section-title { font-size: 1.8rem; }
+            .discover-btn { font-size: 1.2rem; padding: 18px 44px; width: auto; }
+            .start-btn { font-size: 1.8rem; padding: 20px 50px; }
+            .start-title { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Overlay de démarrage -->
     <div class="start-overlay" id="startOverlay">
         <div class="start-title">🎂 Joyeux Anniversaire Axel ! 🎉</div>
         <button class="start-btn" id="startBtn">Découvrir la surprise</button>
@@ -325,9 +332,8 @@
 
         <section class="section" style="text-align: center;">
             <h2 class="section-title" style="justify-content: center;">Ta surprise t'attend</h2>
-            <p style="opacity: 0.9; margin-bottom: 28px; font-size: 1.05rem;">
             <a href="texte.html" class="discover-btn" id="discoverLink">
-                Découvrir la surprise 📜
+                🎁 Découvrir la surprise 📜
             </a>
         </section>
 
@@ -357,19 +363,15 @@
         let bgMusic = null;
         let isMuted = false;
 
-        // Vérifier si la musique a déjà été démarrée (via sessionStorage)
         const musicStartedFlag = sessionStorage.getItem('musicStarted');
         const savedAudio = sessionStorage.getItem('sharedAudio');
 
-        // Si la musique a déjà été démarrée ou qu'il y a un état audio sauvegardé
         if (musicStartedFlag === 'true' || savedAudio) {
-            // Cacher l'overlay immédiatement
             const startOverlay = document.getElementById('startOverlay');
             const muteBtn = document.getElementById('muteBtn');
             startOverlay.style.display = 'none';
             muteBtn.style.display = 'flex';
             
-            // Restaurer la musique
             if (savedAudio) {
                 try {
                     const audioState = JSON.parse(savedAudio);
@@ -381,7 +383,10 @@
                     isMuted = audioState.muted || false;
                     
                     if (audioState.isPlaying) {
-                        bgMusic.play().catch(() => {});
+                        const playPromise = bgMusic.play();
+                        if (playPromise !== undefined) {
+                            playPromise.catch(() => {});
+                        }
                     }
                     
                     updateMuteButton();
@@ -392,7 +397,6 @@
                 createNewAudio();
             }
         } else {
-            // Première visite, on attend le clic
             const startBtn = document.getElementById('startBtn');
             const startOverlay = document.getElementById('startOverlay');
             
@@ -403,7 +407,17 @@
                     startOverlay.style.display = 'none';
                     document.getElementById('muteBtn').style.display = 'flex';
                 }, 500);
-                // Marquer que la musique a été démarrée
+                sessionStorage.setItem('musicStarted', 'true');
+            });
+            
+            startBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                initAudio();
+                startOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    startOverlay.style.display = 'none';
+                    document.getElementById('muteBtn').style.display = 'flex';
+                }, 500);
                 sessionStorage.setItem('musicStarted', 'true');
             });
         }
@@ -413,11 +427,14 @@
             bgMusic.loop = true;
             bgMusic.volume = 0.3;
             
-            bgMusic.play().then(() => {
-                console.log('Musique démarrée');
-            }).catch((e) => {
-                console.log('Erreur audio:', e);
-            });
+            const playPromise = bgMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.catch((e) => {
+                    setTimeout(() => {
+                        if (bgMusic) bgMusic.play().catch(() => {});
+                    }, 100);
+                });
+            }
         }
 
         function createNewAudio() {
@@ -429,20 +446,29 @@
 
         function updateMuteButton() {
             const muteBtn = document.getElementById('muteBtn');
-            muteBtn.textContent = isMuted ? '🔇' : '🔊';
+            if (muteBtn) muteBtn.textContent = isMuted ? '🔇' : '🔊';
         }
 
-        // Bouton mute
         const muteBtn = document.getElementById('muteBtn');
-        muteBtn.addEventListener('click', () => {
-            if (bgMusic) {
-                isMuted = !isMuted;
-                bgMusic.muted = isMuted;
-                muteBtn.textContent = isMuted ? '🔇' : '🔊';
-            }
-        });
+        if (muteBtn) {
+            muteBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (bgMusic) {
+                    isMuted = !isMuted;
+                    bgMusic.muted = isMuted;
+                    muteBtn.textContent = isMuted ? '🔇' : '🔊';
+                }
+            });
+            muteBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                if (bgMusic) {
+                    isMuted = !isMuted;
+                    bgMusic.muted = isMuted;
+                    muteBtn.textContent = isMuted ? '🔇' : '🔊';
+                }
+            });
+        }
 
-        // Sauvegarder l'état du son dans sessionStorage
         function saveAudioState() {
             if (bgMusic) {
                 const audioState = {
@@ -472,6 +498,7 @@
         const slides = document.querySelectorAll('.carousel-slide');
         const dotsContainer = document.getElementById('dots');
         let currentIndex = 0;
+        let carouselInterval;
         
         slides.forEach((_, i) => {
             const dot = document.createElement('button');
@@ -481,10 +508,12 @@
         });
         
         function updateCarousel() {
-            track.style.transform = `translateX(-${currentIndex * 100}%)`;
-            document.querySelectorAll('.dot').forEach((d, i) => {
-                d.classList.toggle('active', i === currentIndex);
-            });
+            if (track) {
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                document.querySelectorAll('.dot').forEach((d, i) => {
+                    d.classList.toggle('active', i === currentIndex);
+                });
+            }
         }
         
         function nextSlide() {
@@ -502,13 +531,27 @@
             updateCarousel();
         }
         
-        setInterval(nextSlide, 5000);
-
-        // Au clic sur le lien, sauvegarder l'état
-        const discoverLink = document.getElementById('discoverLink');
-        discoverLink.addEventListener('click', () => {
-            saveAudioState();
+        function startCarousel() {
+            if (carouselInterval) clearInterval(carouselInterval);
+            carouselInterval = setInterval(nextSlide, 5000);
+        }
+        
+        startCarousel();
+        
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                if (carouselInterval) clearInterval(carouselInterval);
+            } else {
+                startCarousel();
+            }
         });
+
+        const discoverLink = document.getElementById('discoverLink');
+        if (discoverLink) {
+            discoverLink.addEventListener('click', () => {
+                saveAudioState();
+            });
+        }
     </script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>📜 Le Texte Sacré</title>
     <style>
         * {
@@ -28,6 +28,7 @@
             top: -10px;
             z-index: 0;
             opacity: 0.8;
+            pointer-events: none;
         }
 
         @keyframes fall {
@@ -37,19 +38,19 @@
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 20px 15px;
             position: relative;
             z-index: 1;
         }
 
         header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             animation: fadeInDown 0.8s ease;
         }
 
         header h1 {
-            font-size: 2.8rem;
+            font-size: 2rem;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
             margin-bottom: 10px;
             background: linear-gradient(to right, #ffd700, #ff6b6b, #ffd700);
@@ -59,7 +60,7 @@
         }
 
         header p {
-            font-size: 1.1rem;
+            font-size: 1rem;
             opacity: 0.9;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
@@ -71,18 +72,18 @@
             background: rgba(255,255,255,0.2);
             border: 1px solid rgba(255,255,255,0.4);
             color: white;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 50px;
             text-decoration: none;
-            font-size: 0.95rem;
-            margin-bottom: 30px;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
             transition: all 0.3s;
             backdrop-filter: blur(5px);
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .back-btn:hover {
-            background: rgba(255,255,255,0.35);
-            transform: translateX(-3px);
+        .back-btn:active {
+            transform: translateX(-2px);
         }
 
         @keyframes fadeInDown {
@@ -99,16 +100,16 @@
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(15px);
             border-radius: 24px;
-            padding: 35px;
-            margin-bottom: 35px;
+            padding: 25px;
+            margin-bottom: 25px;
             border: 1px solid rgba(255,255,255,0.25);
             box-shadow: 0 8px 32px rgba(0,0,0,0.2);
             animation: fadeInUp 0.8s ease;
         }
 
         .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 12px;
@@ -122,27 +123,31 @@
         .read-btn {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+            gap: 10px;
             background: linear-gradient(135deg, #ffd700, #ff8c00);
             color: #333;
             font-weight: bold;
-            padding: 18px 40px;
+            padding: 14px 25px;
             border-radius: 50px;
-            font-size: 1.2rem;
+            font-size: 1rem;
             cursor: pointer;
             border: none;
             transition: all 0.3s;
             box-shadow: 0 4px 20px rgba(255, 215, 0, 0.5);
+            width: 100%;
+            max-width: 280px;
+            margin: 0 auto;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .read-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.7);
+        .read-btn:active {
+            transform: scale(0.97);
         }
 
         .read-btn-sub {
             margin-top: 12px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             opacity: 0.75;
             font-style: italic;
         }
@@ -159,13 +164,13 @@
         .pdf-frame-wrapper {
             background: transparent;
             overflow: hidden;
-            border-radius: 0;
+            border-radius: 16px;
             box-shadow: none;
         }
 
         .pdf-frame-wrapper iframe {
             width: 100%;
-            height: 800px;
+            height: 500px;
             border: none;
             display: block;
             background: transparent;
@@ -182,26 +187,27 @@
         .download-btn {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            gap: 8px;
             background: linear-gradient(135deg, #ffd700, #ff8c00);
             color: #333;
             font-weight: bold;
-            padding: 14px 28px;
+            padding: 10px 20px;
             border-radius: 50px;
             text-decoration: none;
-            font-size: 1.05rem;
+            font-size: 0.9rem;
             transition: all 0.3s;
             box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .download-btn:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 6px 25px rgba(255, 215, 0, 0.6);
+        .download-btn:active {
+            transform: scale(0.97);
         }
 
         .return-link {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 25px;
             padding-top: 20px;
             border-top: 1px solid rgba(255,255,255,0.3);
         }
@@ -209,20 +215,20 @@
         .return-home {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             background: rgba(255,255,255,0.2);
             border: 1px solid rgba(255,255,255,0.4);
             color: white;
-            padding: 12px 28px;
+            padding: 8px 20px;
             border-radius: 50px;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.9rem;
             transition: all 0.3s;
             backdrop-filter: blur(5px);
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .return-home:hover {
-            background: rgba(255,255,255,0.35);
+        .return-home:active {
             transform: translateY(-2px);
         }
 
@@ -230,43 +236,49 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             border: none;
             color: white;
-            font-size: 1.5rem;
-            width: 50px;
-            height: 50px;
+            font-size: 1.2rem;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             cursor: pointer;
             z-index: 100;
             backdrop-filter: blur(5px);
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .bg-mute-btn:hover {
-            background: rgba(0,0,0,0.7);
-            transform: scale(1.1);
+        .bg-mute-btn:active {
+            transform: scale(0.95);
         }
 
         footer {
             text-align: center;
-            margin-top: 40px;
+            margin-top: 30px;
             opacity: 0.7;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
 
-        @media (max-width: 600px) {
-            header h1 { font-size: 2rem; }
-            .section { padding: 20px; }
-            .pdf-frame-wrapper iframe { height: 500px; }
-            .read-btn { font-size: 1rem; padding: 15px 28px; }
+        @media (min-width: 768px) {
+            .container { padding: 40px 20px; }
+            header h1 { font-size: 2.8rem; }
+            header p { font-size: 1.1rem; }
+            .section-title { font-size: 1.8rem; }
+            .read-btn { font-size: 1.2rem; padding: 18px 40px; width: auto; }
+            .pdf-frame-wrapper iframe { height: 800px; }
+            .download-btn { font-size: 1.05rem; padding: 14px 28px; }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <a href="index.html" class="back-btn" id="backLink">← Retour à la page d'accueil</a>
+        <a href="index.html" class="back-btn" id="backLink">← Retour</a>
 
         <header>
             <h1>📜 Le Texte Sacré</h1>
@@ -331,7 +343,6 @@
         let bgMusic = null;
         let isBgMuted = false;
         
-        // Récupérer l'état du son depuis sessionStorage
         const savedAudio = sessionStorage.getItem('sharedAudio');
         
         if (savedAudio) {
@@ -345,7 +356,10 @@
                 isBgMuted = audioState.muted || false;
                 
                 if (audioState.isPlaying) {
-                    bgMusic.play().catch(() => {});
+                    const playPromise = bgMusic.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(() => {});
+                    }
                 }
                 
                 updateMuteButton();
@@ -365,19 +379,30 @@
         
         function updateMuteButton() {
             const btn = document.getElementById('bgMuteBtn');
-            btn.textContent = isBgMuted ? '🔇' : '🔊';
+            if (btn) btn.textContent = isBgMuted ? '🔇' : '🔊';
         }
         
-        // Bouton mute
         const bgMuteBtn = document.getElementById('bgMuteBtn');
-        bgMuteBtn.addEventListener('click', () => {
-            if (bgMusic) {
-                isBgMuted = !isBgMuted;
-                bgMusic.muted = isBgMuted;
-                bgMuteBtn.textContent = isBgMuted ? '🔇' : '🔊';
-                saveAudioState();
-            }
-        });
+        if (bgMuteBtn) {
+            bgMuteBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (bgMusic) {
+                    isBgMuted = !isBgMuted;
+                    bgMusic.muted = isBgMuted;
+                    bgMuteBtn.textContent = isBgMuted ? '🔇' : '🔊';
+                    saveAudioState();
+                }
+            });
+            bgMuteBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                if (bgMusic) {
+                    isBgMuted = !isBgMuted;
+                    bgMusic.muted = isBgMuted;
+                    bgMuteBtn.textContent = isBgMuted ? '🔇' : '🔊';
+                    saveAudioState();
+                }
+            });
+        }
         
         function saveAudioState() {
             if (bgMusic) {
@@ -392,7 +417,6 @@
         
         setInterval(saveAudioState, 1000);
         
-        // Audio de la voix
         const voiceAudio = new Audio('Audio/Audio Final.m4a');
         let isVoicePlaying = false;
         
@@ -400,16 +424,19 @@
             if (!isVoicePlaying) {
                 isVoicePlaying = true;
                 if (bgMusic) bgMusic.pause();
-                bgMuteBtn.style.opacity = '0.5';
+                if (bgMuteBtn) bgMuteBtn.style.opacity = '0.5';
             }
         });
         
         voiceAudio.addEventListener('ended', () => {
             isVoicePlaying = false;
             if (bgMusic && !isBgMuted) {
-                bgMusic.play().catch(() => {});
+                const playPromise = bgMusic.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(() => {});
+                }
             }
-            bgMuteBtn.style.opacity = '1';
+            if (bgMuteBtn) bgMuteBtn.style.opacity = '1';
             saveAudioState();
         });
         
@@ -419,35 +446,50 @@
             } else if (isVoicePlaying) {
                 isVoicePlaying = false;
                 if (bgMusic && !isBgMuted) {
-                    bgMusic.play().catch(() => {});
+                    const playPromise = bgMusic.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(() => {});
+                    }
                 }
-                bgMuteBtn.style.opacity = '1';
+                if (bgMuteBtn) bgMuteBtn.style.opacity = '1';
             }
         });
         
-        // Ouvrir le texte
         function openText() {
             const pdfSection = document.getElementById('pdfSection');
             const pdfFrame = document.getElementById('pdfFrame');
             const btn = document.getElementById('openTextBtn');
             
-            pdfFrame.src = 'Texte_sacré.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH';
-            pdfSection.classList.add('visible');
+            if (pdfFrame) {
+                pdfFrame.src = 'Texte_sacré.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH';
+            }
+            if (pdfSection) {
+                pdfSection.classList.add('visible');
+            }
             
-            btn.textContent = '✅ Texte ouvert ci-dessous';
-            btn.style.background = 'linear-gradient(135deg, #96e6a1, #4ecdc4)';
-            btn.disabled = true;
+            if (btn) {
+                btn.textContent = '✅ Texte ouvert';
+                btn.style.background = 'linear-gradient(135deg, #96e6a1, #4ecdc4)';
+                btn.disabled = true;
+            }
             
             setTimeout(() => {
-                pdfSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (pdfSection) {
+                    pdfSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             }, 200);
             
-            voiceAudio.play().catch(() => {});
+            const playPromise = voiceAudio.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {});
+            }
         }
         
-        document.getElementById('openTextBtn').onclick = openText;
+        const openTextBtn = document.getElementById('openTextBtn');
+        if (openTextBtn) {
+            openTextBtn.onclick = openText;
+        }
         
-        // Sauvegarder avant de quitter
         const backLink = document.getElementById('backLink');
         const returnHomeLink = document.getElementById('returnHomeLink');
         
@@ -455,12 +497,4 @@
             saveAudioState();
         }
         
-        backLink.addEventListener('click', saveAndExit);
-        returnHomeLink.addEventListener('click', saveAndExit);
-        
-        window.addEventListener('beforeunload', () => {
-            saveAudioState();
-        });
-    </script>
-</body>
-</html>
+        if (backLink) backLink.addEventListener('click', saveAndExit);
