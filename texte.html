@@ -15,7 +15,9 @@
         body {
             font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #ffd89b 100%);
+            background-attachment: fixed;
             min-height: 100vh;
+            min-height: -webkit-fill-available;
             color: #fff;
             overflow-x: hidden;
         }
@@ -39,7 +41,7 @@
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 20px 15px;
+            padding: 20px 15px 40px;
             position: relative;
             z-index: 1;
         }
@@ -73,13 +75,15 @@
             background: rgba(255,255,255,0.2);
             border: 1px solid rgba(255,255,255,0.4);
             color: white;
-            padding: 6px 14px;
+            padding: 8px 16px;
             border-radius: 50px;
             text-decoration: none;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             margin-bottom: 15px;
             transition: all 0.3s;
+            -webkit-backdrop-filter: blur(5px);
             backdrop-filter: blur(5px);
+            cursor: pointer;
         }
 
         .back-btn:active {
@@ -98,6 +102,7 @@
 
         .section {
             background: rgba(255, 255, 255, 0.15);
+            -webkit-backdrop-filter: blur(15px);
             backdrop-filter: blur(15px);
             border-radius: 24px;
             padding: 20px;
@@ -134,8 +139,9 @@
             transition: all 0.3s;
             box-shadow: 0 4px 20px rgba(255, 215, 0, 0.5);
             width: 100%;
-            max-width: 260px;
+            max-width: 280px;
             margin: 0 auto;
+            font-family: inherit;
         }
 
         .read-btn:active {
@@ -149,6 +155,7 @@
             font-style: italic;
         }
 
+        /* ── PDF SECTION ── */
         .pdf-viewer-section {
             display: none;
             animation: fadeInUp 0.6s ease;
@@ -158,26 +165,64 @@
             display: block;
         }
 
-        .pdf-frame-wrapper {
-            background: transparent;
-            overflow: hidden;
-            border-radius: 16px;
+        /*
+         * iOS Safari ne peut pas afficher un PDF dans <iframe>.
+         * On propose à la place un bouton « Ouvrir » (target=_blank)
+         * et un bouton « Télécharger ».
+         */
+        .pdf-ios-box {
+            background: rgba(255,255,255,0.12);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.25);
         }
 
-        .pdf-frame-wrapper iframe {
-            width: 100%;
-            height: 450px;
-            border: none;
-            display: block;
-            background: transparent;
+        .pdf-ios-icon {
+            font-size: 4rem;
+            margin-bottom: 12px;
+        }
+
+        .pdf-ios-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .pdf-ios-desc {
+            font-size: 0.8rem;
+            opacity: 0.75;
+            margin-bottom: 24px;
+            line-height: 1.5;
         }
 
         .pdf-actions {
             display: flex;
+            flex-direction: column;
             gap: 12px;
-            margin-top: 15px;
+            align-items: center;
+        }
+
+        .open-pdf-btn {
+            display: inline-flex;
+            align-items: center;
             justify-content: center;
-            flex-wrap: wrap;
+            gap: 8px;
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            color: #333;
+            font-weight: bold;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.5);
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .open-pdf-btn:active {
+            transform: scale(0.97);
         }
 
         .download-btn {
@@ -185,15 +230,17 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
-            background: linear-gradient(135deg, #ffd700, #ff8c00);
-            color: #333;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.4);
+            color: white;
             font-weight: bold;
-            padding: 8px 16px;
+            padding: 10px 22px;
             border-radius: 50px;
             text-decoration: none;
             font-size: 0.85rem;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            width: 100%;
+            max-width: 280px;
         }
 
         .download-btn:active {
@@ -219,6 +266,7 @@
             text-decoration: none;
             font-size: 0.85rem;
             transition: all 0.3s;
+            -webkit-backdrop-filter: blur(5px);
             backdrop-filter: blur(5px);
         }
 
@@ -228,17 +276,19 @@
 
         .bg-mute-btn {
             position: fixed;
-            bottom: 15px;
-            right: 15px;
+            bottom: 20px;
+            right: 20px;
+            bottom: calc(20px + env(safe-area-inset-bottom));
             background: rgba(0,0,0,0.6);
             border: none;
             color: white;
             font-size: 1.2rem;
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             cursor: pointer;
             z-index: 100;
+            -webkit-backdrop-filter: blur(5px);
             backdrop-filter: blur(5px);
             display: flex;
             align-items: center;
@@ -259,8 +309,8 @@
             .section { padding: 35px; }
             .section-title { font-size: 1.8rem; }
             .read-btn { font-size: 1.2rem; padding: 18px 40px; width: auto; }
-            .pdf-frame-wrapper iframe { height: 800px; }
-            .download-btn { font-size: 1.05rem; padding: 14px 28px; }
+            .pdf-actions { flex-direction: row; justify-content: center; }
+            .open-pdf-btn, .download-btn { width: auto; }
         }
     </style>
 </head>
@@ -285,23 +335,77 @@
         </section>
 
         <section class="pdf-viewer-section" id="pdfSection">
-            <div class="pdf-frame-wrapper">
-                <iframe
-                    id="pdfFrame"
-                    src=""
-                    title="Le Texte Sacré">
-                </iframe>
-            </div>
-            <div class="pdf-actions">
-                <a href="Texte_sacré.pdf" download="Texte_sacré.pdf" class="download-btn">
-                    ⬇ Télécharger le PDF
-                </a>
-            </div>
-            
-            <div class="return-link">
-                <a href="index.html" class="return-home" id="returnHomeLink">
-                    🏠 Retourner à l'accueil
-                </a>
+            <div class="section">
+                <div style="
+                    background: rgba(255,255,255,0.08);
+                    border-radius: 16px;
+                    padding: 24px 20px;
+                    line-height: 1.8;
+                    font-size: 0.97rem;
+                    color: #fff;
+                    max-height: 80vh;
+                    overflow-y: auto;
+                    border: 1px solid rgba(255,255,255,0.15);
+                    text-align: left;
+                ">
+                    <p style="margin-bottom:1.2em;">C'est l'histoire d'Evan et Axel, deux mecs paumés à l'ESUPEC. Un jour, ils sont en cours et
+rigolent ensemble. La pute de prof d'anglais les attrape en train de se foutre de la gueule de
+Gaëlle, une meuf baka, cheveux rouges, enfin bref, un monstre. Elle les interpelle à voix
+haute en les engueulant et là… Evan s'énerve, se lève et crie :
+« FEMMTO' S'PRÉPARE IL ARRIVE MASQUÉ
+LA BAC M'HARCÈLE EN APPELS MASQUÉS. »</p>
+
+                    <p style="margin-bottom:1.2em;">Ensuite s'ensuit un moment de silence puis tout dégénère. Noé, un petit mec tout frêle, brise
+le silence en disant : « Oh bah, j'vais aller me chercher un p'tit café tranquillou pépère »,
+puis Capucine dit : « Nan mais Evan, ça va pas ou quoi ? » Evan lui dit : « Ferme-la, Capu,
+sinon j'vais sortir mon paf. » Pour le calmer, Axel lui touche la cuisse et lui murmure : «
+Fédodobébé, fédodobébé, fédodobébé. » Là, Hugo, choqué par la scène, réagit et menace
+Evan : « Tu te calmes ou sinon je me fous toutes les souris que tu utilises dans le cul. »</p>
+
+                    <p style="margin-bottom:1.2em;">Face à ces menaces, Valentin, le délégué, essaie de calmer les choses : « Les gars,
+calmez-vous, s'il vous plaît, ça sert à rien. » Axel répond instantanément : « Valentin, tu
+penses avoir combien à l'éval de cette aprem ? » pour déstabiliser Valentin. Celui-ci répond
+alors : « Pff, arrêtez de me poser cette question, je peux pas répondre, on l'a pas encore fait,
+j'ai pas vu les questions. » Cela a lancé Valentin dans un monologue sans fin. Face à ce
+boucan, Gaëlle crie : « Taisez-vous ! » Dans la seconde qui suit, elle reçoit en pleine tête
+une chaise, puis une deuxième, puis une table, puis Noé.</p>
+
+                    <p style="margin-bottom:1.2em;">Dans ce bruit sans nom, Paule-Marie, la Congolaise et seul noir de la classe, se lève. Pour
+la décrire rapidement, elle fait 1 m 60, 70 kg. Un gorille, quoi. Elle crie alors : « Ahhh,
+vraiment là, je suis fatiguée de cette classe ! » Jonathan, le raciste, lui répond alors : « Oui,
+oui, allez, King Kong, va faire le mafé. » Une bagarre commença alors entre les deux.
+</p>
+
+                    <p style="margin-bottom:1.2em;">Au fond de la classe, derrière Evan et Axel, deux autres personnes sont assises. Noah
+Herpin et Evan Murzeau. Ceux-ci profitent du chaos pour jouer à un roleplay douteux. Evan
+et Axel entendent alors : « Oh non, pas les menottes, monsieur, s'il vous plaît, nan, pas la
+matraque dans les fesses ! » Cette scène fit exploser de rire Evan et Axel</p>
+
+                    <p style="margin-bottom:1.2em;">Ensuite, le pire arriva. Théo, l'autiste de la classe qui aime être dominé, profitant du chaos,
+se met nu et tente de violer Dany, un beau mâle réunionnais sans défense. Instantanément,
+Zargan s'interpose entre les deux et maîtrise Théo. Alerté par le bruit, monsieur Ménard
+arrive et comprend qu'une personne a failli se faire violer. Il ne cherche pas à comprendre, il
+sait qu'il doit agir vite. Alors il attrape Zargan et la punit en la déshabillant devant tout le
+monde et lui met des fessées en s'exclamant : « T'es une vilaine fille, Zargan ! » Puis, dans
+l'euphorie, Axel crie : « Yasmin, sort un sein. »
+</p>
+
+                    <p style="margin-bottom:1.2em;">Puis madame Richer arrive et crie : « Aujourd'hui, on va faire les C++ et les Java. » Alors la
+classe se calme, admirant l'action de monsieur Ménard et snap la scène. Puis monsieur
+Ménard propose une tournante avec Zargane et invite toute la classe. Madame Richer,
+jalouse, dit qu'elle aussi fera partie de la tournante. S'ensuit alors une orgie géante. Tout le
+monde y participe sauf Hugo, qui préfère rester se masturber dans son coin en se mettant
+une souris dans les fesses.
+</p>
+
+                    <p style="margin-bottom:0;">C'est une journée banale à l'ESUPEC.</p>
+                </div>
+
+                <div class="return-link">
+                    <a href="index.html" class="return-home" id="returnHomeLink">
+                        🏠 Retourner à l'accueil
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -313,10 +417,10 @@
     <button class="bg-mute-btn" id="bgMuteBtn">🔊</button>
 
     <script>
-        // Confettis
-        const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#45b7d1', '#f093fb', '#f5576c', '#96e6a1'];
-        for (let i = 0; i < 50; i++) {
-            const c = document.createElement('div');
+        // ── Confettis ──
+        var colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#45b7d1', '#f093fb', '#f5576c', '#96e6a1'];
+        for (var i = 0; i < 40; i++) {
+            var c = document.createElement('div');
             c.className = 'confetti';
             c.style.left = Math.random() * 100 + 'vw';
             c.style.background = colors[Math.floor(Math.random() * colors.length)];
@@ -328,148 +432,141 @@
             document.body.appendChild(c);
         }
 
-        let bgMusic = null;
-        let isBgMuted = false;
-        
-        const savedAudio = sessionStorage.getItem('sharedAudio');
-        
-        if (savedAudio) {
-            try {
-                const audioState = JSON.parse(savedAudio);
-                bgMusic = new Audio('Audio/OFFROAD.mp3');
-                bgMusic.loop = true;
-                bgMusic.volume = 0.3;
-                bgMusic.currentTime = audioState.currentTime || 0;
-                bgMusic.muted = audioState.muted || false;
-                isBgMuted = audioState.muted || false;
-                
-                if (audioState.isPlaying) {
-                    bgMusic.play().catch(function() {});
-                }
-                
-                updateMuteButton();
-            } catch(e) {
-                createNewBgMusic();
-            }
-        } else {
-            createNewBgMusic();
-        }
-        
-        function createNewBgMusic() {
+        // ── Audio ──
+        var bgMusic = null;
+        var voiceAudio = null;
+        var isBgMuted = false;
+        var audioReady = false;
+
+        // Récupère l'état sauvegardé depuis index.html
+        var savedAudio = null;
+        try { savedAudio = JSON.parse(sessionStorage.getItem('sharedAudio')); } catch(e) {}
+
+        // Si la musique jouait déjà sur index.html, on la relance immédiatement.
+        // iOS autorise play() au chargement de la page SI la session audio a déjà
+        // été débloquée par une interaction sur la page précédente.
+        if (savedAudio && savedAudio.isPlaying) {
             bgMusic = new Audio('Audio/OFFROAD.mp3');
             bgMusic.loop = true;
             bgMusic.volume = 0.3;
-            bgMusic.play().catch(function() {});
+            bgMusic.muted = savedAudio.muted || false;
+            isBgMuted = savedAudio.muted || false;
+            try { bgMusic.currentTime = savedAudio.currentTime || 0; } catch(e) {}
+            bgMusic.play().catch(function() {
+                // Si iOS bloque quand même, on attend le premier tap
+                bgMusic = null;
+                audioReady = false;
+            });
+            audioReady = true;
+            voiceAudio = new Audio('Audio/Audio Final.m4a');
+            setupVoiceListeners();
+            updateMuteButton();
         }
-        
+
+        function initAudio() {
+            if (audioReady) return;
+            audioReady = true;
+
+            bgMusic = new Audio('Audio/OFFROAD.mp3');
+            bgMusic.loop = true;
+            bgMusic.volume = 0.3;
+
+            if (savedAudio) {
+                try {
+                    bgMusic.currentTime = savedAudio.currentTime || 0;
+                    bgMusic.muted = savedAudio.muted || false;
+                    isBgMuted = savedAudio.muted || false;
+                } catch(e) {}
+            }
+
+            bgMusic.play().catch(function() {});
+            updateMuteButton();
+
+            voiceAudio = new Audio('Audio/Audio Final.m4a');
+            setupVoiceListeners();
+        }
+
+        function setupVoiceListeners() {
+            voiceAudio.addEventListener('ended', function() {
+                if (bgMusic && !isBgMuted) bgMusic.play().catch(function() {});
+                var btn = document.getElementById('bgMuteBtn');
+                if (btn) btn.style.opacity = '1';
+                saveAudioState();
+            });
+        }
+
         function updateMuteButton() {
-            const btn = document.getElementById('bgMuteBtn');
+            var btn = document.getElementById('bgMuteBtn');
             if (btn) btn.textContent = isBgMuted ? '🔇' : '🔊';
         }
-        
-        const bgMuteBtn = document.getElementById('bgMuteBtn');
+
+        function saveAudioState() {
+            if (bgMusic) {
+                try {
+                    sessionStorage.setItem('sharedAudio', JSON.stringify({
+                        currentTime: bgMusic.currentTime,
+                        isPlaying: !bgMusic.paused,
+                        muted: bgMusic.muted
+                    }));
+                } catch(e) {}
+            }
+        }
+
+        setInterval(saveAudioState, 1000);
+
+        var bgMuteBtn = document.getElementById('bgMuteBtn');
         if (bgMuteBtn) {
-            bgMuteBtn.onclick = function(e) {
+            bgMuteBtn.addEventListener('click', function(e) {
                 e.preventDefault();
+                initAudio(); // démarre l'audio si pas encore fait
                 if (bgMusic) {
                     isBgMuted = !isBgMuted;
                     bgMusic.muted = isBgMuted;
-                    bgMuteBtn.textContent = isBgMuted ? '🔇' : '🔊';
+                    updateMuteButton();
                     saveAudioState();
                 }
-            };
+            });
         }
-        
-        function saveAudioState() {
-            if (bgMusic) {
-                const audioState = {
-                    currentTime: bgMusic.currentTime,
-                    isPlaying: !bgMusic.paused,
-                    muted: bgMusic.muted
-                };
-                sessionStorage.setItem('sharedAudio', JSON.stringify(audioState));
-            }
-        }
-        
-        setInterval(saveAudioState, 1000);
-        
-        const voiceAudio = new Audio('Audio/Audio Final.m4a');
-        let isVoicePlaying = false;
-        
-        voiceAudio.addEventListener('play', function() {
-            if (!isVoicePlaying) {
-                isVoicePlaying = true;
-                if (bgMusic) bgMusic.pause();
-                if (bgMuteBtn) bgMuteBtn.style.opacity = '0.5';
-            }
-        });
-        
-        voiceAudio.addEventListener('ended', function() {
-            isVoicePlaying = false;
-            if (bgMusic && !isBgMuted) {
-                bgMusic.play().catch(function() {});
-            }
-            if (bgMuteBtn) bgMuteBtn.style.opacity = '1';
-            saveAudioState();
-        });
-        
-        voiceAudio.addEventListener('pause', function() {
-            if (voiceAudio.currentTime === voiceAudio.duration || voiceAudio.ended) {
-                // Fin normale
-            } else if (isVoicePlaying) {
-                isVoicePlaying = false;
-                if (bgMusic && !isBgMuted) {
-                    bgMusic.play().catch(function() {});
-                }
-                if (bgMuteBtn) bgMuteBtn.style.opacity = '1';
-            }
-        });
-        
-        function openText() {
-            const pdfSection = document.getElementById('pdfSection');
-            const pdfFrame = document.getElementById('pdfFrame');
-            const btn = document.getElementById('openTextBtn');
-            
-            if (pdfFrame) {
-                pdfFrame.src = 'Texte_sacré.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH';
-            }
-            if (pdfSection) {
-                pdfSection.classList.add('visible');
-            }
-            
-            if (btn) {
-                btn.textContent = '✅ Texte ouvert';
-                btn.style.background = 'linear-gradient(135deg, #96e6a1, #4ecdc4)';
-                btn.disabled = true;
-            }
-            
-            setTimeout(function() {
-                if (pdfSection) {
-                    pdfSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            }, 200);
-            
-            voiceAudio.play().catch(function() {});
-        }
-        
-        const openTextBtn = document.getElementById('openTextBtn');
+
+        // ── Bouton "Lire le texte sacré" ──
+        var openTextBtn = document.getElementById('openTextBtn');
         if (openTextBtn) {
-            openTextBtn.onclick = openText;
+            openTextBtn.addEventListener('click', function() {
+                // Première interaction : on initialise l'audio
+                initAudio();
+
+                // Afficher la section PDF
+                var pdfSection = document.getElementById('pdfSection');
+                if (pdfSection) pdfSection.classList.add('visible');
+
+                // Changer l'état du bouton
+                openTextBtn.textContent = '✅ Texte ouvert';
+                openTextBtn.style.background = 'linear-gradient(135deg, #96e6a1, #4ecdc4)';
+                openTextBtn.disabled = true;
+
+                // Scroll vers la section
+                setTimeout(function() {
+                    if (pdfSection) pdfSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 200);
+
+                // Jouer la voix (audio déjà initialisé par initAudio)
+                if (voiceAudio) {
+                    if (bgMusic) bgMusic.pause();
+                    var btn = document.getElementById('bgMuteBtn');
+                    if (btn) btn.style.opacity = '0.5';
+                    voiceAudio.play().catch(function() {});
+                }
+            });
         }
-        
-        const backLink = document.getElementById('backLink');
-        const returnHomeLink = document.getElementById('returnHomeLink');
-        
-        function saveAndExit() {
-            saveAudioState();
-        }
-        
-        if (backLink) backLink.onclick = saveAndExit;
-        if (returnHomeLink) returnHomeLink.onclick = saveAndExit;
-        
-        window.addEventListener('beforeunload', function() {
-            saveAudioState();
-        });
+
+        // ── Liens retour ──
+        var backLink = document.getElementById('backLink');
+        var returnHomeLink = document.getElementById('returnHomeLink');
+        function saveAndExit() { saveAudioState(); }
+        if (backLink) backLink.addEventListener('click', saveAndExit);
+        if (returnHomeLink) returnHomeLink.addEventListener('click', saveAndExit);
+
+        window.addEventListener('beforeunload', saveAudioState);
     </script>
 </body>
 </html>
